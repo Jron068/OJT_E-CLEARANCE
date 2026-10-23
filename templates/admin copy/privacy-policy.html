@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="City College of Calamba â€“ Privacy Policy" />
+  <meta name="theme-color" content="#0d47a1" />
+  <title>Privacy Policy â€“ CCC OJT Admin</title>
+  <link rel="stylesheet" href="{{ url_for('role_asset', role='admin', filename='styles/main.css') }}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plh7eecHM/0tZwMHpEdB4XVhF6IfQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="app-wrapper">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-logo brand-logo">
+          <div class="sidebar-brand-logo-placeholder">
+            <img class="sidebar-brand-logo" src="{{ url_for('static', filename='LogIn-Copy/img/dci logo.jpg') }}" alt="DCI Logo">
+          </div>
+        </div>
+        <div class="brand-text">
+          <strong>City College of</strong>
+          <span>Calamba</span>
+        </div>
+      </div>
+
+      <div class="sidebar-dept">
+        Department of<br />
+        <strong>Computing and Informatics</strong>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Site pages">
+        <p class="sidebar-nav-label">Main Menu</p>
+        <ul role="list">
+          <li>
+            <a href="{{ url_for('admin_dashboard') }}">
+              <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-gauge-high"></i></span>
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('admin_page', page='user-management.html') }}">
+              <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-users-gear"></i></span>
+              User Management
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('admin_page', page='create-account.html') }}">
+              <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-user-plus"></i></span>
+              Create Account
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('admin_page', page='forms.html') }}">
+              <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-file-lines"></i></span>
+              Forms
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('admin_page', page='privacy-policy.html') }}" class="active" aria-current="page">
+              <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></span>
+              Privacy Policy
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-account">
+        <p class="acc-label">Account</p>
+        <button class="acc-logout" id="logoutBtn" aria-label="Log out of the system">
+          <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Log Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- ===== MAIN AREA ===== -->
+    <div class="main-area">
+
+      <header class="topbar" role="banner">
+        <button class="topbar-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+
+        <div class="notification-wrapper">
+          <button class="topbar-btn" id="notifBtn" aria-label="Notifications" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-bell" aria-hidden="true"></i>
+            <span class="badge" aria-hidden="true"></span>
+          </button>
+          <div class="notif-dropdown" id="notifDropdown" role="dialog" aria-label="Notifications panel">
+            <div class="notif-header">
+              <span>Notifications</span>
+              <button id="markAllRead">Mark all read</button>
+            </div>
+            <div class="notif-empty">No new notifications</div>
+          </div>
+        </div>
+
+        <div class="topbar-user" aria-label="Logged in as ADMIN">
+          <div class="user-avatar" aria-hidden="true">
+            <i class="fa-solid fa-circle-user"></i>
+          </div>
+          <span>ADMIN</span>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <main class="page-content" id="main-content" tabindex="-1">
+
+        <div class="page-header">
+          <div class="breadcrumb" aria-label="Breadcrumb">
+            <span>ADMIN</span><span>Privacy Policy</span>
+          </div>
+          <h1>Privacy Policy</h1>
+          <p>Last updated: October 1, 2026</p>
+        </div>
+
+        <div class="policy-content" role="document" aria-label="Privacy policy document">
+
+          <p>
+            The City College of Calamba â€“ Department of Computing and Informatics is committed to
+            protecting the privacy and security of all personal information collected through the
+            OJT Management System. This policy outlines how we collect, use, store, and safeguard
+            your data in accordance with applicable data privacy laws.
+          </p>
+
+          <h2>1. Information We Collect</h2>
+          <p>We collect the following personal information when you use this system:</p>
+          <ul>
+            <li>Full name, student ID or employee number</li>
+            <li>Institutional email address</li>
+            <li>Department and academic program</li>
+            <li>OJT-related records including time logs, evaluations, and submissions</li>
+            <li>System usage logs for audit and security purposes</li>
+          </ul>
+
+          <h2>2. How We Use Your Information</h2>
+          <p>Collected information is used exclusively for:</p>
+          <ul>
+            <li>Managing and monitoring On-the-Job Training activities</li>
+            <li>Communicating with students, facilitators, and partner companies</li>
+            <li>Generating reports for academic and administrative purposes</li>
+            <li>Ensuring the security and integrity of the system</li>
+          </ul>
+
+          <h2>3. Data Storage and Security</h2>
+          <p>
+            All personal data is stored on secure institutional servers with access controls.
+            We implement administrative, technical, and physical safeguards to protect against
+            unauthorized access, disclosure, or destruction of your information.
+          </p>
+          <p>
+            Passwords are stored using industry-standard hashing algorithms and are never stored
+            in plain text. Access to personal data is restricted to authorized personnel only.
+          </p>
+
+          <h2>4. Data Sharing</h2>
+          <p>
+            We do not sell, rent, or share your personal information with third parties except:
+          </p>
+          <ul>
+            <li>OJT partner companies and host training establishments, as required by the program</li>
+            <li>Government agencies when required by law</li>
+            <li>Internal departments for administrative coordination</li>
+          </ul>
+
+          <h2>5. Data Retention</h2>
+          <p>
+            Personal data is retained for the duration required by institutional policies and
+            applicable regulations. OJT records are typically retained for a minimum of five (5)
+            years from the date of completion.
+          </p>
+
+          <h2>6. Your Rights</h2>
+          <p>Under applicable data privacy laws, you have the right to:</p>
+          <ul>
+            <li>Access your personal information held by the institution</li>
+            <li>Request correction of inaccurate data</li>
+            <li>Object to processing of your personal data</li>
+            <li>File a complaint with the Data Privacy Officer</li>
+          </ul>
+
+          <h2>7. Cookies and Session Data</h2>
+          <p>
+            This system uses session cookies solely to maintain your authenticated session.
+            No third-party tracking cookies are used.
+          </p>
+
+          <h2>8. Changes to This Policy</h2>
+          <p>
+            We may update this Privacy Policy from time to time. Any significant changes will be
+            communicated through the system. Continued use of the system constitutes acceptance
+            of the updated policy.
+          </p>
+
+          <h2>9. Contact</h2>
+          <p>
+            For privacy-related concerns, please contact the Data Privacy Officer of the
+            City College of Calamba, Department of Computing and Informatics.
+          </p>
+
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Confirm Logout -->
+  <div class="confirm-overlay" id="confirmLogout" role="dialog" aria-modal="true" aria-labelledby="confirmLogoutTitle">
+    <div class="confirm-box">
+      <div class="confirm-icon" aria-hidden="true"><i class="fa-solid fa-right-from-bracket"></i></div>
+      <h4 id="confirmLogoutTitle">Log Out</h4>
+      <p>Are you sure you want to log out?</p>
+      <div class="confirm-actions">
+        <button class="btn btn-outline" id="cancelLogout">Cancel</button>
+        <button class="btn btn-danger" id="confirmLogoutBtn">Log Out</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="{{ url_for('role_asset', role='admin', filename='js/main.js') }}"></script>
+</body>
+</html>

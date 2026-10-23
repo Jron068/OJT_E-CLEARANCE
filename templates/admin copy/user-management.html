@@ -1,0 +1,318 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="City College of Calamba â€“ User Management" />
+  <meta name="theme-color" content="#0d47a1" />
+  <title>User Management â€“ CCC OJT Admin</title>
+  <link rel="stylesheet" href="{{ url_for('role_asset', role='admin', filename='styles/main.css') }}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plh7eecHM/0tZwMHpEdB4XVhF6IfQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="app-wrapper">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-logo brand-logo">
+          <div class="sidebar-brand-logo-placeholder">
+            <img class="sidebar-brand-logo" src="{{ url_for('static', filename='LogIn-Copy/img/dci logo.jpg') }}" alt="DCI Logo">
+          </div>
+        </div>
+        <div class="brand-text">
+          <strong>City College of</strong>
+          <span>Calamba</span>
+        </div>
+      </div>
+
+      <div class="sidebar-dept">
+        Department of<br />
+        <strong>Computing and Informatics</strong>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Site pages">
+        <p class="sidebar-nav-label">Main Menu</p>
+        <ul role="list">
+          <li>
+            <a href="{{ url_for('admin_dashboard') }}">
+              <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-gauge-high"></i></span>
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('admin_page', page='user-management.html') }}" class="active" aria-current="page">
+              <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-users-gear"></i></span>
+              User Management
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('admin_page', page='create-account.html') }}">
+              <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-user-plus"></i></span>
+              Create Account
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('admin_page', page='forms.html') }}">
+              <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-file-lines"></i></span>
+              Forms
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('admin_page', page='privacy-policy.html') }}">
+              <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></span>
+              Privacy Policy
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-account">
+        <p class="acc-label">Account</p>
+        <button class="acc-logout" id="logoutBtn" aria-label="Log out of the system">
+          <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Log Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- ===== MAIN AREA ===== -->
+    <div class="main-area">
+
+      <header class="topbar" role="banner">
+        <button class="topbar-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+
+        <div class="notification-wrapper">
+          <button class="topbar-btn" id="notifBtn" aria-label="Notifications" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-bell" aria-hidden="true"></i>
+            <span class="badge" aria-hidden="true"></span>
+          </button>
+          <div class="notif-dropdown" id="notifDropdown" role="dialog" aria-label="Notifications panel">
+            <div class="notif-header">
+              <span>Notifications</span>
+              <button id="markAllRead">Mark all read</button>
+            </div>
+            <div class="notif-empty">No new notifications</div>
+          </div>
+        </div>
+
+        <div class="topbar-user" aria-label="Logged in as ADMIN">
+          <div class="user-avatar" aria-hidden="true">
+            <i class="fa-solid fa-circle-user"></i>
+          </div>
+          <span>ADMIN</span>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <main class="page-content" id="main-content" tabindex="-1">
+
+        <div class="page-header">
+          <div class="breadcrumb" aria-label="Breadcrumb">
+            <span>ADMIN</span><span>User Management</span>
+          </div>
+          <h1>User Management</h1>
+          <p>Manage account privileges, search directory, and edit active users.</p>
+        </div>
+
+        <!-- Controls Bar -->
+        <div class="data-card">
+          <div class="data-card-header">
+            <div class="header-actions" style="width:100%; justify-content:space-between;">
+              <div class="d-flex gap-1 align-center" style="flex-wrap:wrap;">
+                <div class="search-box" role="search">
+                  <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+                  <label for="umSearch" class="sr-only">Search users</label>
+                  <input type="search" id="umSearch" placeholder="Search User...." autocomplete="off" />
+                </div>
+                <label for="roleFilter" class="sr-only">Filter by role</label>
+                <select class="filter-select" id="roleFilter" aria-label="Filter users by role">
+                  <option value="">ALL ROLES</option>
+                  <option value="OJT Student">OJT Student</option>
+                  <option value="Facilitator">Facilitator</option>
+                  <option value="Administrator">Administrator</option>
+                </select>
+              </div>
+              <a href="{{ url_for('admin_page', page='create-account.html') }}" class="btn btn-primary" aria-label="Create a new user account">
+                <i class="fa-solid fa-plus" aria-hidden="true"></i> Create new account
+              </a>
+            </div>
+          </div>
+
+          <div class="table-wrapper" role="region" aria-label="User management table" tabindex="0">
+            <table aria-label="User accounts">
+              <thead>
+                <tr>
+                  <th scope="col">Full Name</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Date Created</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody id="umTableBody">
+                <!-- Populated by user-management.js -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination -->
+          <div class="data-card-footer" style="justify-content:space-between; align-items:center;">
+            <span id="umCount" style="font-size:.82rem; color:var(--clr-text-muted);">Showing 0 users</span>
+            <div class="d-flex gap-1" id="paginationControls" aria-label="Pagination"></div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ===== EDIT USER MODAL ===== -->
+  <div class="modal-overlay" id="editModal" role="dialog" aria-modal="true" aria-labelledby="editModalTitle">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="editModalTitle">
+          <i class="fa-solid fa-user-pen" aria-hidden="true"></i> Edit User Account
+        </h3>
+        <button class="modal-close" id="closeEditModal" aria-label="Close edit modal">&#10005;</button>
+      </div>
+      <div class="modal-body">
+        <form id="editUserForm" novalidate>
+          <input type="hidden" id="editUserId" />
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="editRole">Account Role <span class="req" aria-hidden="true">*</span></label>
+              <select class="form-control" id="editRole" required aria-required="true">
+                <option value="">SELECT ROLE..</option>
+                <option value="OJT Student">OJT Student</option>
+                <option value="Facilitator">Facilitator</option>
+                <option value="Administrator">Administrator</option>
+              </select>
+              <span class="form-error" id="editRoleErr" role="alert">Please select a role.</span>
+            </div>
+            <div class="form-group">
+              <label for="editStatus">Account Status</label>
+              <select class="form-control" id="editStatus" aria-label="Account status">
+                <option value="">SELECT STATUS..</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+                <option value="Pending">Pending</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="editFullName">Full Name <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" class="form-control" id="editFullName"
+                     placeholder="Last Name, First Name, Middle Name"
+                     required aria-required="true" autocomplete="name" />
+              <span class="form-error" id="editNameErr" role="alert">Full name is required.</span>
+            </div>
+            <div class="form-group">
+              <label for="editDept">Department <span class="req" aria-hidden="true">*</span></label>
+              <select class="form-control" id="editDept" required aria-required="true">
+                <option value="">Select Department..</option>
+                <option value="Computing and Informatics">Computing and Informatics</option>
+                <option value="Business Administration">Business Administration</option>
+                <option value="Education">Education</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Nursing">Nursing</option>
+              </select>
+              <span class="form-error" id="editDeptErr" role="alert">Please select a department.</span>
+            </div>
+            <div class="form-group col-span-2">
+              <label for="editEmail">Email Address <span class="req" aria-hidden="true">*</span></label>
+              <input type="email" class="form-control" id="editEmail"
+                     placeholder="user@ccc.edu.ph"
+                     required aria-required="true" autocomplete="email" />
+              <span class="form-error" id="editEmailErr" role="alert">A valid email is required.</span>
+            </div>
+            <div class="form-group col-span-2">
+              <label for="editPassword">Password Option <span class="req" aria-hidden="true">*</span></label>
+              <div class="password-wrapper">
+                <input type="password" class="form-control" id="editPassword"
+                       placeholder="Enter new password (leave blank to keep current)"
+                       minlength="9" maxlength="128"
+                       autocomplete="new-password" />
+                <button type="button" class="btn btn-outline" id="autoGenPassword" aria-label="Auto-generate a password">
+                  AUTO GENERATE
+                </button>
+              </div>
+              <span class="form-hint">Leave blank to keep current password. If replacing it, use 9+ characters with uppercase, lowercase, and a special character.</span>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" id="cancelEditBtn">Cancel</button>
+        <button class="btn btn-primary" id="saveAccountBtn">
+          <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> SAVE ACCOUNT
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="assignStudentsModal" role="dialog" aria-modal="true" aria-labelledby="assignStudentsTitle">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="assignStudentsTitle"><i class="fa-solid fa-user-group" aria-hidden="true"></i> Assign Students</h3>
+        <button class="modal-close" id="closeAssignStudentsModal" aria-label="Close assignment modal">&#10005;</button>
+      </div>
+      <div class="modal-body">
+        <p id="assignStudentsFacilitator" class="form-hint"></p>
+        <div class="form-group">
+          <label for="assignmentStudentSearch">Search by student name or ID</label>
+          <input class="form-control" id="assignmentStudentSearch" type="search" autocomplete="off" />
+        </div>
+        <div class="form-group">
+          <label for="assignmentDepartmentFilter">Filter by student department</label>
+          <select class="form-control" id="assignmentDepartmentFilter">
+            <option value="">All departments</option>
+          </select>
+        </div>
+        <div id="assignmentStudentList" class="assignment-student-list" aria-label="Select students"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" id="cancelAssignStudentsBtn">Cancel</button>
+        <button class="btn btn-primary" id="saveAssignStudentsBtn">Save assignments</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Delete Dialog -->
+  <div class="confirm-overlay" id="confirmDelete" role="dialog" aria-modal="true" aria-labelledby="confirmDeleteTitle">
+    <div class="confirm-box">
+      <div class="confirm-icon" aria-hidden="true"><i class="fa-solid fa-trash-can"></i></div>
+      <h4 id="confirmDeleteTitle">Delete User</h4>
+      <p id="confirmDeleteMsg">Are you sure you want to delete this user? This action cannot be undone.</p>
+      <div class="confirm-actions">
+        <button class="btn btn-outline" id="cancelDeleteBtn">Cancel</button>
+        <button class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Logout Dialog -->
+  <div class="confirm-overlay" id="confirmLogout" role="dialog" aria-modal="true" aria-labelledby="confirmLogoutTitle">
+    <div class="confirm-box">
+      <div class="confirm-icon" aria-hidden="true"><i class="fa-solid fa-right-from-bracket"></i></div>
+      <h4 id="confirmLogoutTitle">Log Out</h4>
+      <p>Are you sure you want to log out?</p>
+      <div class="confirm-actions">
+        <button class="btn btn-outline" id="cancelLogout">Cancel</button>
+        <button class="btn btn-danger" id="confirmLogoutBtn">Log Out</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="{{ url_for('role_asset', role='admin', filename='js/main.js') }}"></script>
+  <script src="{{ url_for('role_asset', role='admin', filename='js/user-management.js') }}"></script>
+</body>
+</html>

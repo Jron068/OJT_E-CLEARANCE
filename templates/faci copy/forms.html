@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="OJT Forms â€“ City College of Calamba Facilitator" />
+  <title>Forms | OJT Facilitator â€“ CCC</title>
+  <link rel="stylesheet" href="{{ url_for('role_asset', role='facilitator', filename='css/styles.css') }}" />
+</head>
+<body>
+<div class="app-wrapper">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main Navigation">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-logo-placeholder">
+        <img class="sidebar-brand-logo" src="{{ url_for('static', filename='LogIn-Copy/img/dci logo.jpg') }}" alt="DCI Logo">
+      </div>
+      <div class="sidebar-brand-text">
+        <span class="school-name">City College of<br>Calamba</span>
+        <span class="dept-name">Dept. of Computing &amp; Informatics</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav" aria-label="Main menu">
+      <p class="sidebar-section-label">Main Menu</p>
+      <a href="{{ url_for('facilitator_dashboard') }}" class="sidebar-nav-item">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        Dashboard
+      </a>
+      <a href="{{ url_for('facilitator_page', page='ojt-students.html') }}" class="sidebar-nav-item">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        OJT Students
+      </a>
+      <a href="{{ url_for('facilitator_page', page='documents.html') }}" class="sidebar-nav-item">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+        Documents
+      </a>
+      <a href="{{ url_for('facilitator_page', page='forms.html') }}" class="sidebar-nav-item active" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        Forms
+      </a>
+      <a href="{{ url_for('facilitator_page', page='notification.html') }}" class="sidebar-nav-item">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+        Notification
+      </a>
+    </nav>
+    <div class="sidebar-account">
+      <p class="sidebar-section-label">Account</p>
+      <a href="{{ url_for('facilitator_page', page='profile.html') }}" class="sidebar-nav-item">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+        Profile
+      </a>
+      <a href="{{ url_for('facilitator_page', page='settings.html') }}" class="sidebar-nav-item">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+        Settings
+      </a>
+      <a href="{{ url_for('facilitator_page', page='privacy-policy.html') }}" class="sidebar-nav-item">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 4l5 2.18V11c0 3.5-2.33 6.79-5 7.93-2.67-1.14-5-4.43-5-7.93V7.18L12 5z"/></svg>
+        Privacy Policy
+      </a>
+      <button class="sidebar-nav-item logout" id="logoutBtn" aria-label="Log out">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+        Log Out
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <header class="topbar" role="banner">
+      <div class="topbar-actions">
+        <button class="topbar-icon-btn" aria-label="Notifications">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+          <span class="notification-badge" aria-hidden="true"></span>
+        </button>
+        <a href="{{ url_for('facilitator_page', page='profile.html') }}" class="topbar-profile" aria-label="View profile">
+          <div class="topbar-avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+          </div>
+          <span class="topbar-profile-label">Profile</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="page-content" role="main">
+      <div class="page-header" style="display:flex;align-items:center;justify-content:space-between;">
+        <h1 class="page-title">Forms</h1>
+        <button class="btn btn-primary" id="addFormBtn" aria-label="Add new form" aria-haspopup="dialog">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+          ADD
+        </button>
+      </div>
+
+      <!-- Forms List -->
+      <div class="form-list" id="formsList" role="list" aria-label="Available OJT forms">
+
+        <div class="form-list-item" role="listitem">
+          <span class="form-list-item-title">OJT Form 1: On-The-Job Training Partner Company Approval of OJT-Facilitator Form</span>
+          <button class="form-download-btn" aria-label="Download OJT Form 1" title="Download">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          </button>
+        </div>
+
+        <div class="form-list-item" role="listitem">
+          <span class="form-list-item-title">OJT Form 2: On-The-Job Training Partner Company Approval of Host Training Establishment Form</span>
+          <button class="form-download-btn" aria-label="Download OJT Form 2" title="Download">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          </button>
+        </div>
+
+        <div class="form-list-item" role="listitem">
+          <span class="form-list-item-title">OJT Form 3: Endorsement Letter</span>
+          <button class="form-download-btn" aria-label="Download OJT Form 3" title="Download">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          </button>
+        </div>
+
+        <div class="form-list-item" role="listitem">
+          <span class="form-list-item-title">OJT Form 4: Department of Computing and Informatics Memorandum of Agreement</span>
+          <button class="form-download-btn" aria-label="Download OJT Form 4" title="Download">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          </button>
+        </div>
+
+        <div class="form-list-item" role="listitem">
+          <span class="form-list-item-title">OJT Form 5: On-The-Job Training Agreement *For Facilitator</span>
+          <button class="form-download-btn" aria-label="Download OJT Form 5" title="Download">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          </button>
+        </div>
+
+        <div class="form-list-item" role="listitem">
+          <span class="form-list-item-title">OJT Form 6: On-The-Job Training Agreement *For Student</span>
+          <button class="form-download-btn" aria-label="Download OJT Form 6" title="Download">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          </button>
+        </div>
+
+        <div class="form-list-item" role="listitem">
+          <span class="form-list-item-title">OJT Form 7: On-The-Job Training Time Log</span>
+          <button class="form-download-btn" aria-label="Download OJT Form 7" title="Download">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          </button>
+        </div>
+
+        <div class="form-list-item" role="listitem">
+          <span class="form-list-item-title">OJT Form 8: On-The-Job Training Time Log Summary</span>
+          <button class="form-download-btn" aria-label="Download OJT Form 8" title="Download">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          </button>
+        </div>
+
+        <div class="form-list-item" role="listitem">
+          <span class="form-list-item-title">OJT Form 9: On-The-Job Training Performance Evaluation Sheet</span>
+          <button class="form-download-btn" aria-label="Download OJT Form 9" title="Download">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          </button>
+        </div>
+
+      </div><!-- /form-list -->
+    </main>
+  </div>
+</div>
+
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+     ADD FORM MODAL
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<div class="modal-overlay" id="addFormModal" role="dialog" aria-modal="true" aria-labelledby="addFormModalTitle">
+  <div class="modal">
+    <div class="modal-header">
+      <p class="modal-title" id="addFormModalTitle">Add Form</p>
+      <button class="modal-close-btn" id="closeAddFormModal" aria-label="Close add form modal">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form id="addFormForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="newFormTitle">
+            Form Title <span class="required" aria-label="required">*</span>
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            id="newFormTitle"
+            placeholder="Enter form title........."
+            aria-required="true"
+            maxlength="200"
+          />
+          <span class="text-xs text-muted" id="formTitleError" role="alert" style="color:var(--color-danger);display:none;">Form title is required.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="newFormDesc">
+            Description <span class="optional">(optional)</span>
+          </label>
+          <textarea
+            class="form-control form-control-textarea"
+            id="newFormDesc"
+            placeholder="Enter form description...."
+            rows="4"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="newFormFile">
+            Upload Form File <span class="required" aria-label="required">*</span>
+          </label>
+          <div class="upload-area" id="formFileDropzone" role="button" tabindex="0" aria-label="Click or drag to upload form file">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"/></svg>
+            <p class="upload-area-text"><span>Click to upload</span> or drag and drop</p>
+            <p class="upload-area-text" style="font-size:0.72rem;">PDF, DOC, DOCX (max 10MB)</p>
+          </div>
+          <input type="file" id="newFormFile" accept=".pdf,.doc,.docx" style="display:none;" aria-required="true" />
+          <p id="selectedFileName" class="text-xs text-muted mt-2" aria-live="polite"></p>
+          <span class="text-xs text-muted" id="formFileError" role="alert" style="color:var(--color-danger);display:none;">Please upload a form file.</span>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" id="cancelAddForm" type="button">Cancel</button>
+      <button class="btn btn-primary" id="submitAddForm" type="button" aria-label="Submit new form">Add Form</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+<script src="{{ url_for('role_asset', role='facilitator', filename='js/app.js') }}"></script>
+</body>
+</html>
+

@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="OJT Student Dashboard â€“ City College of Calamba">
+  <title>Dashboard | OJT Student Portal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='student_copy/css/portal-overrides.css') }}">
+</head>
+<body>
+<a class="sr-only skip-link" href="#mainContent">Skip to main content</a>
+<div class="app-layout"><div id="sidebarContainer"></div><div class="main-wrapper">
+<div id="topbarContainer"></div><main class="page-content" id="mainContent" role="main">
+<div class="page-header"><h1 class="page-header__title" id="pageTitle">OJT Student Dashboard</h1><p class="page-header__sub" id="pageSub"></p></div>
+<section class="stat-grid" aria-label="Document statistics">
+<div class="stat-card stat-card--total"><div><p class="stat-card__value" id="statTotal">0</p><p class="stat-card__label">Total documents</p></div></div>
+<div class="stat-card stat-card--verified"><div><p class="stat-card__value" id="statVerified">0</p><p class="stat-card__label">Verified documents</p></div></div>
+<div class="stat-card stat-card--pending"><div><p class="stat-card__value" id="statPending">0</p><p class="stat-card__label">Pending documents</p></div></div>
+<div class="stat-card stat-card--revision"><div><p class="stat-card__value" id="statRevision">0</p><p class="stat-card__label">Rejected documents</p></div></div>
+</section>
+<div class="dash-grid">
+<section class="card card--ojt" aria-labelledby="ojtCardTitle"><div class="card__head"><h2 class="card__title" id="ojtCardTitle">My OJT Information</h2><a href="{{ url_for('student_ojt_info') }}" class="btn btn-outline btn--sm">Edit</a></div><div class="ojt-info-grid" id="ojtInfoGrid"></div></section>
+<section class="card card--anno" aria-labelledby="annoTitle"><div class="card__head"><h2 class="card__title" id="annoTitle">Announcements</h2></div><div class="card__body" id="annoBody"></div></section>
+</div>
+<section class="card mt-5" aria-labelledby="docsTitle" style="margin-top:18px"><div class="card__head"><h2 class="card__title" id="docsTitle">My Documents</h2><a href="{{ url_for('student_documents') }}" class="btn btn-teal btn--sm">View All</a></div>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Document Name</th><th>Date Uploaded</th><th>Status</th><th>Actions</th></tr></thead><tbody id="docsTbody"></tbody></table></div></section>
+</main></div></div>
+<script src="{{ url_for('static', filename='student_copy/js/app.js') }}"></script><script src="{{ url_for('static', filename='student_copy/js/dashboard.js') }}"></script>
+</body></html>
+
+

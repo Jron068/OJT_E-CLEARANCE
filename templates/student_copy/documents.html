@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Documents | OJT Student Portal</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='student_copy/css/portal-overrides.css') }}"></head>
+<body><a class="sr-only skip-link" href="#mainContent">Skip to main content</a>
+<div class="app-layout"><div id="sidebarContainer"></div><div class="main-wrapper"><div id="topbarContainer"></div><main class="page-content" id="mainContent">
+<div class="page-header d-flex ai-center jc-between" style="flex-wrap:wrap;gap:10px"><h1 class="page-header__title">Documents</h1><button class="btn btn-teal" id="openUploadBtn"><span aria-hidden="true">+</span> Submit Form</button></div>
+<div class="card"><div role="tablist" aria-label="Document filters" class="tabs" id="docTabs">
+<button class="tab-btn active" role="tab" aria-selected="true" data-tab="all">All Documents</button><button class="tab-btn" role="tab" aria-selected="false" data-tab="verified">Verified documents</button><button class="tab-btn" role="tab" aria-selected="false" data-tab="pending">Pending documents</button><button class="tab-btn" role="tab" aria-selected="false" data-tab="revision">Rejected documents</button></div>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Document Name</th><th>Date Uploaded</th><th>Status</th><th>File</th></tr></thead><tbody id="documentsTbody"></tbody></table></div></div>
+</main></div></div>
+<div class="modal-overlay" id="uploadModal" role="dialog" aria-modal="true" aria-labelledby="uploadModalTitle" aria-hidden="true"><div class="modal">
+<div class="modal__head"><h2 class="modal__title" id="uploadModalTitle">Submit Document</h2><button class="modal__close" type="button" id="closeUploadBtn" aria-label="Close"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
+<div class="modal__reminders"><p><strong>Reminders</strong></p><p>Accepted: PDF, DOC, DOCX, JPG, PNG. Maximum 10 MB.</p></div>
+<form class="modal__body" id="uploadForm">
+<div class="form-group"><label class="form-label" for="docTitle">Form title *</label><select class="form-control" id="docTitle" required><option value="">Select a form</option>
+<option>OJT Form 1</option><option>OJT Form 2</option><option>OJT Form 3</option><option>OJT Form 4</option><option>OJT Form 5</option><option>OJT Form 6</option><option>OJT Form 7</option><option>OJT Form 8</option><option>OJT Form 9</option></select><span class="form-error" id="titleError"></span></div>
+<div class="form-group"><label class="form-label" for="docFile">Choose file *</label><input class="form-control" type="file" id="docFile" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required><span class="form-error" id="fileError"></span><span class="form-hint">Maximum 10 MB.</span></div>
+<div class="form-actions"><button class="btn btn-accent" type="submit">Submit</button><button class="btn btn-outline" type="button" id="cancelUploadBtn">Cancel</button></div>
+</form></div></div>
+<script src="{{ url_for('static', filename='student_copy/js/app.js') }}"></script><script src="{{ url_for('static', filename='student_copy/js/documents.js') }}"></script></body></html>

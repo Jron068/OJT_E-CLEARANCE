@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="City College of Calamba â€“ OJT Forms Download" />
+  <meta name="theme-color" content="#0d47a1" />
+  <title>Forms â€“ CCC OJT Admin</title>
+  <link rel="stylesheet" href="{{ url_for('role_asset', role='admin', filename='styles/main.css') }}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plh7eecHM/0tZwMHpEdB4XVhF6IfQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="app-wrapper">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-logo brand-logo">
+          <div class="sidebar-brand-logo-placeholder">
+            <img class="sidebar-brand-logo" src="{{ url_for('static', filename='LogIn-Copy/img/dci logo.jpg') }}" alt="DCI Logo">
+          </div>
+        </div>
+        <div class="brand-text">
+          <strong>City College of</strong>
+          <span>Calamba</span>
+        </div>
+      </div>
+
+      <div class="sidebar-dept">
+        Department of<br />
+        <strong>Computing and Informatics</strong>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Site pages">
+        <p class="sidebar-nav-label">Main Menu</p>
+        <ul role="list">
+          <li>
+            <a href="{{ url_for('admin_dashboard') }}">
+              <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-gauge-high"></i></span>
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('admin_page', page='user-management.html') }}">
+              <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-users-gear"></i></span>
+              User Management
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('admin_page', page='create-account.html') }}">
+              <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-user-plus"></i></span>
+              Create Account
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('admin_page', page='forms.html') }}" class="active" aria-current="page">
+              <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-file-lines"></i></span>
+              Forms
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('admin_page', page='privacy-policy.html') }}">
+              <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></span>
+              Privacy Policy
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-account">
+        <p class="acc-label">Account</p>
+        <button class="acc-logout" id="logoutBtn" aria-label="Log out of the system">
+          <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Log Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- ===== MAIN AREA ===== -->
+    <div class="main-area">
+
+      <header class="topbar" role="banner">
+        <button class="topbar-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+
+        <div class="notification-wrapper">
+          <button class="topbar-btn" id="notifBtn" aria-label="Notifications" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-bell" aria-hidden="true"></i>
+            <span class="badge" aria-hidden="true"></span>
+          </button>
+          <div class="notif-dropdown" id="notifDropdown" role="dialog" aria-label="Notifications panel">
+            <div class="notif-header">
+              <span>Notifications</span>
+              <button id="markAllRead">Mark all read</button>
+            </div>
+            <div class="notif-empty">No new notifications</div>
+          </div>
+        </div>
+
+        <div class="topbar-user" aria-label="Logged in as ADMIN">
+          <div class="user-avatar" aria-hidden="true">
+            <i class="fa-solid fa-circle-user"></i>
+          </div>
+          <span>ADMIN</span>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <main class="page-content" id="main-content" tabindex="-1">
+
+        <div class="page-header">
+          <div class="breadcrumb" aria-label="Breadcrumb">
+            <span>ADMIN</span><span>Forms</span>
+          </div>
+          <h1>Forms</h1>
+          <p>Download official OJT forms for students and facilitators.</p>
+        </div>
+
+        <form id="adminFormUpload" class="form-section" style="margin-bottom:1.5rem;">
+          <label for="formTitle">Form title</label>
+          <input id="formTitle" name="title" required maxlength="200" />
+          <label for="formAudience">Available to</label>
+          <select id="formAudience" name="audience">
+            <option value="All">All portal users</option>
+            <option value="OJT Student">Students</option>
+            <option value="Facilitator">Facilitators</option>
+          </select>
+          <label for="formFile">PDF file</label>
+          <input id="formFile" name="file" type="file" accept="application/pdf,.pdf" required />
+          <button class="btn btn-primary" type="submit"><i class="fa-solid fa-upload" aria-hidden="true"></i> Upload form</button>
+        </form>
+
+        <!-- Forms List -->
+        <div class="forms-list" id="adminFormsList" role="list" aria-label="OJT downloadable forms">
+
+          <div class="form-item" role="listitem">
+            <i class="fa-regular fa-file-pdf" style="color:#e53935; font-size:1.2rem; flex-shrink:0;" aria-hidden="true"></i>
+            <span>OJT Form 1: ON-THE-JOB TRAINING PARTNER COMPANY APPROVAL OF OJT-FACILITATOR FORM.</span>
+            <button class="download-btn" data-form="OJT Form 1" aria-label="Download OJT Form 1">
+              <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div class="form-item" role="listitem">
+            <i class="fa-regular fa-file-pdf" style="color:#e53935; font-size:1.2rem; flex-shrink:0;" aria-hidden="true"></i>
+            <span>OJT Form 2: ON-THE-JOB TRAINING PARTNER COMPANY APPROVAL OF HOST TRAINING ESTABLISHMENT FORM</span>
+            <button class="download-btn" data-form="OJT Form 2" aria-label="Download OJT Form 2">
+              <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div class="form-item" role="listitem">
+            <i class="fa-regular fa-file-pdf" style="color:#e53935; font-size:1.2rem; flex-shrink:0;" aria-hidden="true"></i>
+            <span>OJT Form 3: ENDORSEMENT LETTER</span>
+            <button class="download-btn" data-form="OJT Form 3" aria-label="Download OJT Form 3">
+              <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div class="form-item" role="listitem">
+            <i class="fa-regular fa-file-pdf" style="color:#e53935; font-size:1.2rem; flex-shrink:0;" aria-hidden="true"></i>
+            <span>OJT Form 4: DEPARTMENT OF COMPUTING AND INFORMATICS MEMORANDUM OF AGREEMENT</span>
+            <button class="download-btn" data-form="OJT Form 4" aria-label="Download OJT Form 4">
+              <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div class="form-item" role="listitem">
+            <i class="fa-regular fa-file-pdf" style="color:#e53935; font-size:1.2rem; flex-shrink:0;" aria-hidden="true"></i>
+            <span>OJT Form 5: ON-THE-JOB TRAINING AGREEMENT <em>*For facilitator</em></span>
+            <button class="download-btn" data-form="OJT Form 5" aria-label="Download OJT Form 5 for facilitator">
+              <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div class="form-item" role="listitem">
+            <i class="fa-regular fa-file-pdf" style="color:#e53935; font-size:1.2rem; flex-shrink:0;" aria-hidden="true"></i>
+            <span>OJT Form 6: ON-THE-JOB TRAINING AGREEMENT <em>*For Student</em></span>
+            <button class="download-btn" data-form="OJT Form 6" aria-label="Download OJT Form 6 for student">
+              <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div class="form-item" role="listitem">
+            <i class="fa-regular fa-file-pdf" style="color:#e53935; font-size:1.2rem; flex-shrink:0;" aria-hidden="true"></i>
+            <span>OJT Form 7: ON-THE-JOB TRAINING TIME LOG</span>
+            <button class="download-btn" data-form="OJT Form 7" aria-label="Download OJT Form 7">
+              <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div class="form-item" role="listitem">
+            <i class="fa-regular fa-file-pdf" style="color:#e53935; font-size:1.2rem; flex-shrink:0;" aria-hidden="true"></i>
+            <span>OJT Form 8: ON-THE-JOB TRAINING TIME LOG SUMMARY</span>
+            <button class="download-btn" data-form="OJT Form 8" aria-label="Download OJT Form 8">
+              <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div class="form-item" role="listitem">
+            <i class="fa-regular fa-file-pdf" style="color:#e53935; font-size:1.2rem; flex-shrink:0;" aria-hidden="true"></i>
+            <span>OJT Form 9: ON-THE-JOB TRAINING PERFORMANCE EVALUATION SHEET</span>
+            <button class="download-btn" data-form="OJT Form 9" aria-label="Download OJT Form 9">
+              <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+            </button>
+          </div>
+
+        </div>
+        <!-- end forms-list -->
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Confirm Logout -->
+  <div class="confirm-overlay" id="confirmLogout" role="dialog" aria-modal="true" aria-labelledby="confirmLogoutTitle">
+    <div class="confirm-box">
+      <div class="confirm-icon" aria-hidden="true"><i class="fa-solid fa-right-from-bracket"></i></div>
+      <h4 id="confirmLogoutTitle">Log Out</h4>
+      <p>Are you sure you want to log out?</p>
+      <div class="confirm-actions">
+        <button class="btn btn-outline" id="cancelLogout">Cancel</button>
+        <button class="btn btn-danger" id="confirmLogoutBtn">Log Out</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="{{ url_for('role_asset', role='admin', filename='js/main.js') }}"></script>
+  <script src="{{ url_for('role_asset', role='admin', filename='js/forms.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,284 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="City College of Calamba â€“ Create Account" />
+  <meta name="theme-color" content="#0d47a1" />
+  <title>Create Account â€“ CCC OJT Admin</title>
+  <link rel="stylesheet" href="{{ url_for('role_asset', role='admin', filename='styles/main.css') }}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plh7eecHM/0tZwMHpEdB4XVhF6IfQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="app-wrapper">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-logo brand-logo">
+          <div class="sidebar-brand-logo-placeholder">
+            <img class="sidebar-brand-logo" src="{{ url_for('static', filename='LogIn-Copy/img/dci logo.jpg') }}" alt="DCI Logo">
+          </div>
+        </div>
+        <div class="brand-text">
+          <strong>City College of</strong>
+          <span>Calamba</span>
+        </div>
+      </div>
+
+      <div class="sidebar-dept">
+        Department of<br />
+        <strong>Computing and Informatics</strong>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Site pages">
+        <p class="sidebar-nav-label">Main Menu</p>
+        <ul role="list">
+          <li>
+            <a href="{{ url_for('admin_dashboard') }}">
+              <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-gauge-high"></i></span>
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('admin_page', page='user-management.html') }}">
+              <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-users-gear"></i></span>
+              User Management
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('admin_page', page='create-account.html') }}" class="active" aria-current="page">
+              <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-user-plus"></i></span>
+              Create Account
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('admin_page', page='forms.html') }}">
+              <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-file-lines"></i></span>
+              Forms
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('admin_page', page='privacy-policy.html') }}">
+              <span class="nav-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></span>
+              Privacy Policy
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-account">
+        <p class="acc-label">Account</p>
+        <button class="acc-logout" id="logoutBtn" aria-label="Log out of the system">
+          <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Log Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- ===== MAIN AREA ===== -->
+    <div class="main-area">
+
+      <header class="topbar" role="banner">
+        <button class="topbar-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+
+        <div class="notification-wrapper">
+          <button class="topbar-btn" id="notifBtn" aria-label="Notifications" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-bell" aria-hidden="true"></i>
+            <span class="badge" aria-hidden="true"></span>
+          </button>
+          <div class="notif-dropdown" id="notifDropdown" role="dialog" aria-label="Notifications panel">
+            <div class="notif-header">
+              <span>Notifications</span>
+              <button id="markAllRead">Mark all read</button>
+            </div>
+            <div class="notif-empty">No new notifications</div>
+          </div>
+        </div>
+
+        <div class="topbar-user" aria-label="Logged in as ADMIN">
+          <div class="user-avatar" aria-hidden="true">
+            <i class="fa-solid fa-circle-user"></i>
+          </div>
+          <span>ADMIN</span>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <main class="page-content" id="main-content" tabindex="-1">
+
+        <div class="page-header">
+          <div class="breadcrumb" aria-label="Breadcrumb">
+            <span>ADMIN</span><span>Create Account</span>
+          </div>
+          <h1>Create Account</h1>
+          <p>Provision credentials for Students, and Facilitators.</p>
+        </div>
+
+        <!-- Stepper Card -->
+        <div class="step-wrapper" role="region" aria-label="Account creation wizard">
+
+          <!-- Step Header -->
+          <div class="step-header">
+            <div class="step-badge" id="stepBadge" aria-live="polite">Step 1 of 2</div>
+            <div class="step-progress" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" aria-label="Step progress">
+              <div class="step-progress-bar" id="stepProgressBar" style="width:50%;"></div>
+            </div>
+          </div>
+
+          <!-- ====== STEP 1: Select Role ====== -->
+          <div class="step-body" id="step1" aria-labelledby="step1Title">
+            <h2 id="step1Title" style="font-size:1.05rem; font-weight:700; margin-bottom:1rem;">
+              Select User Role
+            </h2>
+
+            <div class="role-cards" role="radiogroup" aria-required="true" aria-label="Select a role to create">
+              <button type="button" class="role-card" id="roleStudent" data-role="OJT Student"
+                      role="radio" aria-checked="false" aria-describedby="roleStudentDesc">
+                <h3><i class="fa-solid fa-user-graduate" aria-hidden="true"></i> OJT Student</h3>
+                <p id="roleStudentDesc">Student trainees undergoing OJT</p>
+              </button>
+              <button type="button" class="role-card" id="roleFacilitator" data-role="Facilitator"
+                      role="radio" aria-checked="false" aria-describedby="roleFacilitatorDesc">
+                <h3><i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i> Facilitator</h3>
+                <p id="roleFacilitatorDesc">Faculty &amp; OJT Coordinators</p>
+              </button>
+            </div>
+            <span class="form-error mt-2" id="roleSelectionErr" role="alert" style="display:none;">
+              Please select a role to continue.
+            </span>
+          </div>
+
+          <!-- ====== STEP 2: Fill Information ====== -->
+          <div class="step-body" id="step2" style="display:none;" aria-labelledby="step2Title">
+            <div class="creating-for-bar">
+              <span>Creating Account For: <strong id="creatingForLabel">â€”</strong></span>
+              <button type="button" class="btn btn-accent btn-sm" id="changeRoleBtn" aria-label="Go back and change role">
+                Change
+              </button>
+            </div>
+
+            <form id="createAccountForm" novalidate>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="caFullName">Full Name <span class="req" aria-hidden="true">*</span></label>
+                  <input type="text" class="form-control" id="caFullName"
+                         placeholder="Last Name, First Name, Middle Name"
+                         required aria-required="true" autocomplete="name" />
+                  <span class="form-error" id="caNameErr" role="alert">Full name is required.</span>
+                </div>
+                <div class="form-group">
+                  <label for="caDept">Department <span class="req" aria-hidden="true">*</span></label>
+                  <select class="form-control" id="caDept" required aria-required="true">
+                    <option value="">Select Department..</option>
+                    <option value="Computing and Informatics">Computing and Informatics</option>
+                    <option value="Business Administration">Business Administration</option>
+                    <option value="Education">Education</option>
+                    <option value="Engineering">Engineering</option>
+                    <option value="Nursing">Nursing</option>
+                  </select>
+                  <span class="form-error" id="caDeptErr" role="alert">Please select a department.</span>
+                </div>
+                <div class="form-group">
+                  <label for="caStatus">Status <span class="req" aria-hidden="true">*</span></label>
+                  <select class="form-control" id="caStatus" required aria-required="true">
+                    <option value="">Select Status..</option>
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                    <option value="Pending">Pending</option>
+                  </select>
+                  <span class="form-error" id="caStatusErr" role="alert">Please select a status.</span>
+                </div>
+                <div class="form-group">
+                  <label for="caUserId">User ID <span class="req" aria-hidden="true">*</span></label>
+                  <input type="text" class="form-control" id="caUserId"
+                         placeholder="e.g. 2024-BSCS-001"
+                         required aria-required="true" autocomplete="off" />
+                  <span class="form-error" id="caUserIdErr" role="alert">User ID is required.</span>
+                </div>
+                <div class="form-group col-span-2">
+                  <label for="caPassword">Password <span class="req" aria-hidden="true">*</span></label>
+                  <div class="password-wrapper">
+                    <input type="password" class="form-control" id="caPassword"
+                           placeholder="Enter password"
+                           minlength="9" maxlength="128"
+                           required aria-required="true" autocomplete="new-password" />
+                    <input type="password" class="form-control" id="caPasswordConfirm"
+                           placeholder="Confirm password"
+                           minlength="9" maxlength="128"
+                           required aria-required="true" autocomplete="new-password" />
+                  </div>
+                  <span class="form-hint">At least 9 characters, including uppercase, lowercase, and a special character.</span>
+                  <span class="form-error" id="caPasswordErr" role="alert">Passwords do not match.</span>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Step Footer -->
+          <div class="step-footer">
+            <button class="btn btn-outline" id="cancelStepBtn" aria-label="Cancel account creation and go back">
+              <i class="fa-solid fa-xmark" aria-hidden="true"></i> Cancel
+            </button>
+            <button class="btn btn-accent" id="stepNextBtn" aria-label="Continue to next step">
+              Continue to Information <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+
+        </div>
+        <!-- end step-wrapper -->
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Confirm Logout -->
+  <div class="confirm-overlay" id="confirmLogout" role="dialog" aria-modal="true" aria-labelledby="confirmLogoutTitle">
+    <div class="confirm-box">
+      <div class="confirm-icon" aria-hidden="true"><i class="fa-solid fa-right-from-bracket"></i></div>
+      <h4 id="confirmLogoutTitle">Log Out</h4>
+      <p>Are you sure you want to log out?</p>
+      <div class="confirm-actions">
+        <button class="btn btn-outline" id="cancelLogout">Cancel</button>
+        <button class="btn btn-danger" id="confirmLogoutBtn">Log Out</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="modal-overlay" id="successModal" role="dialog" aria-modal="true" aria-labelledby="successTitle">
+    <div class="modal" style="max-width:420px; text-align:center;">
+      <div class="modal-header" style="background:var(--clr-success);">
+        <h3 id="successTitle">
+          <i class="fa-solid fa-circle-check" aria-hidden="true"></i> Account Created
+        </h3>
+        <button class="modal-close" id="closeSuccessModal" aria-label="Close success dialog">&#10005;</button>
+      </div>
+      <div class="modal-body" style="padding:2rem 1.5rem;">
+        <div style="font-size:3rem; margin-bottom:.75rem;" aria-hidden="true"><i class="fa-solid fa-circle-check"></i></div>
+        <p style="font-size:1rem; margin-bottom:.5rem; font-weight:600;" id="successMessage">
+          Account created successfully!
+        </p>
+        <p style="font-size:.875rem; color:var(--clr-text-muted);">
+          The user has been provisioned and can now log in.
+        </p>
+      </div>
+      <div class="modal-footer" style="justify-content:center; gap:1rem;">
+        <a href="{{ url_for('admin_page', page='user-management.html') }}" class="btn btn-primary">View Users</a>
+        <button class="btn btn-outline" id="createAnotherBtn">Create Another</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="{{ url_for('role_asset', role='admin', filename='js/main.js') }}"></script>
+  <script src="{{ url_for('role_asset', role='admin', filename='js/create-account.js') }}"></script>
+</body>
+</html>
